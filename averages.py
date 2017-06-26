@@ -103,6 +103,46 @@ def calculate_late_days_avg(an_col_num, sp_col_num, ap_col_num, sn_col_num):
 
 		return g1, g2, g3, g4
 
+
+# function for getting lists for late days; some of the late days data could not be converted to proper ints
+def calculate_salary_avg(an_col_num, sp_col_num, ap_col_num, sn_col_num):
+	g1 = []
+	g2 = []
+	g3 = []
+	g4 = []
+	with open('mturkexperiencebias/qualtrics_experiencedata_new.csv', 'rb') as csvfile:
+		reader = csv.reader(csvfile)
+		for row in reader:
+			if row[6]=='TRUE':
+				if row[25]=='': # if allison is mom
+					a = is_number(row[ap_col_num])
+					s = is_number(row[sn_col_num])
+				else: # if sally is the mom
+					a = is_number(row[an_col_num])
+					s = is_number(row[sp_col_num])
+				if row[-1]=='1':
+					if a!=-1 and a>999:
+						g1.append(a)
+					if s!=-1 and s>999:
+						g1.append(s)
+				if row[-1]=='2':
+					if a!=-1 and a>999:
+						g2.append(a)
+					if s!=-1 and s>999:
+						g2.append(s)
+				if row[-1]=='3':
+					if a!=-1 and a>999:
+						g3.append(a)
+					if s!=-1 and s>999:
+						g3.append(s)
+				if row[-1]=='4':
+					if a!=-1 and a>999:
+						g4.append(a)
+					if s!=-1 and s>999:
+						g4.append(s)
+
+		return g1, g2, g3, g4
+
 # function for calculating competence and returning 4 lists
 def calculate_competence_avg():
 	g1 = []
@@ -164,7 +204,7 @@ group1_percentile, group2_percentile, group3_percentile, group4_percentile = cal
 group1_percentile_avg, group2_percentile_avg, group3_percentile_avg, group4_percentile_avg, group1_percentile_std, group2_percentile_std, group3_percentile_std, group4_percentile_std = stats(group1_percentile, group2_percentile, group3_percentile, group4_percentile)
 
 # for salary, should we ignore results less than 1k or multiply by 1k?
-group1_salary, group2_salary, group3_salary, group4_salary = calculate_double_column(38, 55, 72, 89)
+group1_salary, group2_salary, group3_salary, group4_salary = calculate_salary_avg(38, 55, 72, 89)
 group1_salary_avg, group2_salary_avg, group3_salary_avg, group4_salary_avg, group1_salary_std, group2_salary_std, group3_salary_std, group4_salary_std = stats(group1_salary, group2_salary, group3_salary, group4_salary)
 
 group1_management, group2_management, group3_management, group4_management = calculate_double_column(40, 57, 74, 91)
