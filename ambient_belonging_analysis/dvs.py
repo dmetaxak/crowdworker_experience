@@ -18,27 +18,28 @@ def write_column(variable_name, col_list, all_rows, i):
         dv_list = []
         for j in range(0, len(col_list)):
             col_num = col_list[j]
-            dv_list.append(checkstring(all_rows[i][col_num]))
+            variable_value = checkstring(all_rows[i][col_num])
+            if col_num == 29 or col_num == 33 or col_num == 49: # flips values for AS1, FN2, GS1
+            	variable_value = 8 - variable_value
+            dv_list.append(variable_value)
         dv_value = statistics.mean(dv_list)
         all_rows[i].append(dv_value)
 
 # adds calculated columns to 'pilot_dvs.csv'
 with open('pilot.csv', 'rb') as csvfile_r:
-	with open('pilot_dvs.csv', 'wb') as csvfile_w:
+	with open('ret.csv', 'wb') as csvfile_w:
 	    writer = csv.writer(csvfile_w)
 	    reader = csv.reader(csvfile_r)
 	    all_rows = [row for row in reader]
 	    for i in range(0, len(all_rows)):
-	    	write_column('Enrollment Intention', [21, 22, 23], all_rows, i)
-	    	write_column('Ambient Belonging', [25, 26, 27, 28], all_rows, i)
-	    	write_column('Anticipated Success', [29, 30, 31], all_rows, i)
+	    	write_column('EnrollmentIntention', [21, 22, 23], all_rows, i)
+	    	write_column('AmbientBelonging', [25, 26, 27, 28], all_rows, i)
+	    	write_column('AnticipatedSuccess', [29, 30, 31], all_rows, i)
 	    	write_column('Fun', [32, 33, 34], all_rows, i)
-	    	write_column('Natural Skill', [35, 36, 37], all_rows, i)
+	    	write_column('NaturalSkill', [35, 36, 37], all_rows, i)
 	    	write_column('Confidence', [38, 39], all_rows, i)
-	    	write_column('Longterm Behavior', [40, 41, 42], all_rows, i)
+	    	write_column('LongtermBehavior', [40, 41, 42], all_rows, i)
 	    	write_column('Stereotypes', [43, 44, 45], all_rows, i)
 	    	write_column('Masculinity', [46, 47, 48], all_rows, i)
-	    	write_column('Gender Stereotypes', [49, 50, 51, 52], all_rows, i)
+	    	write_column('GenderStereotypes', [49, 50, 51, 52], all_rows, i)
 	    writer.writerows(all_rows)
-
-
