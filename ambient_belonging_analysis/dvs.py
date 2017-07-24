@@ -31,6 +31,7 @@ with open('pilot.csv', 'rb') as csvfile_r:
 	    writer = csv.writer(csvfile_w)
 	    reader = csv.reader(csvfile_r)
 	    all_rows = [row for row in reader]
+	    all_rows[0][53] = 'Gender' # renames Q18 header to Gender
 	    for i in range(0, len(all_rows)):
 	    	write_column('EnrollmentIntention', [21, 22, 23], all_rows, i)
 	    	write_column('AmbientBelonging', [25, 26, 27, 28], all_rows, i)
@@ -42,4 +43,6 @@ with open('pilot.csv', 'rb') as csvfile_r:
 	    	write_column('Stereotypes', [43, 44, 45], all_rows, i)
 	    	write_column('Masculinity', [46, 47, 48], all_rows, i)
 	    	write_column('GenderStereotypes', [49, 50, 51, 52], all_rows, i)
-	    writer.writerows(all_rows)
+	    to_exclude = {1, 2} # excluding the 2nd and 3rd rows
+	    all_rows_2 = [element for j, element in enumerate(all_rows) if j not in to_exclude]
+	    writer.writerows(all_rows_2)
