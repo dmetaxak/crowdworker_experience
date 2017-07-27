@@ -5,6 +5,13 @@ from scipy import stats
 datafile="ret.csv"
 data = pd.read_csv(datafile)
 
+# calculates eta squared
+def eta_squared(aov):
+    aov['eta_sq'] = 'NaN'
+    aov['eta_sq'] = aov[:-1]['sum_sq']/sum(aov['sum_sq'])
+    return aov
+
+
 # prints out a 2x2 anova table
 def double_anova(data, dep_col, ind_col1, ind_col2):
   N = len(data[dep_col]) # sample size
@@ -51,26 +58,26 @@ def double_anova(data, dep_col, ind_col1, ind_col2):
                             index=[ind_col1, ind_col2, 
                             ind_col1 + ":" + ind_col2, 'Residual'])
 
+  eta_squared(aov_table1)
   print(aov_table1)
 
 print 'Enrollment Intention'
-double_anova(data, 'EnrollmentIntention', 'Gender', 'Condition_DO')
+double_anova(data, 'EnrollmentIntention', 'Gender', 'text_condition')
 print '\n Ambient Belonging'
-double_anova(data, 'AmbientBelonging', 'Gender', 'Condition_DO')
+double_anova(data, 'AmbientBelonging', 'Gender', 'text_condition')
 print '\n Anticipated Success'
-double_anova(data, 'AnticipatedSuccess', 'Gender', 'Condition_DO')
+double_anova(data, 'AnticipatedSuccess', 'Gender', 'text_condition')
 print '\n Fun'
-double_anova(data, 'Fun', 'Gender', 'Condition_DO')
+double_anova(data, 'Fun', 'Gender', 'text_condition')
 print '\n Natural Skill'
-double_anova(data, 'NaturalSkill', 'Gender', 'Condition_DO')
+double_anova(data, 'NaturalSkill', 'Gender', 'text_condition')
 print '\n Confidence'
-double_anova(data, 'Confidence', 'Gender', 'Condition_DO')
+double_anova(data, 'Confidence', 'Gender', 'text_condition')
 print '\n Longterm Behavior'
-double_anova(data, 'LongtermBehavior', 'Gender', 'Condition_DO')
+double_anova(data, 'LongtermBehavior', 'Gender', 'text_condition')
 print '\n Stereotypes'
-double_anova(data, 'Stereotypes', 'Gender', 'Condition_DO')
+double_anova(data, 'Stereotypes', 'Gender', 'text_condition')
 print '\n Masculinity'
-double_anova(data, 'Masculinity', 'Gender', 'Condition_DO')
+double_anova(data, 'Masculinity', 'Gender', 'text_condition')
 print '\n Gender Stereotypes'
-double_anova(data, 'GenderStereotypes', 'Gender', 'Condition_DO')
-
+double_anova(data, 'GenderStereotypes', 'Gender', 'text_condition')
