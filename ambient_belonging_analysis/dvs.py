@@ -25,7 +25,7 @@ def write_column(variable_name, col_list, all_rows, i):
         dv_value = statistics.mean(dv_list)
         all_rows[i].append(dv_value)
 
-# adds calculated columns to 'pilot_dvs.csv'
+# adds calculated columns to 'ret.csv'
 with open('pilot.csv', 'rb') as csvfile_r:
 	with open('ret.csv', 'wb') as csvfile_w:
 	    writer = csv.writer(csvfile_w)
