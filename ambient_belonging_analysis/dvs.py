@@ -27,7 +27,7 @@ def write_column(variable_name, col_list, all_rows, i):
 
 # adds calculated columns to 'pilot_dvs.csv'
 with open('pilot.csv', 'rb') as csvfile_r:
-	with open('ret.csv', 'wb') as csvfile_w:
+	with open('AmBe_FB_0801.csv', 'wb') as csvfile_w:
 	    writer = csv.writer(csvfile_w)
 	    reader = csv.reader(csvfile_r)
 	    all_rows = [row for row in reader]

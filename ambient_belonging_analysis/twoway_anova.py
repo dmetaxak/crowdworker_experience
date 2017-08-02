@@ -2,7 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from scipy import stats
 
-datafile="ret.csv"
+datafile="AmBe_FB_0801.csv"
 data = pd.read_csv(datafile)
 
 # prints out a 2x2 anova table
